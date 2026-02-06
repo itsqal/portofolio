@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Anaking Faiqal Lufi</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0a192f', // Primary Dark
+                            800: '#112240', // Card/Section bg
+                            700: '#233554', // Borders/Accents
+                        },
+                        accent: {
+                            DEFAULT: '#64ffda', // Subtle blue/teal highlight
+                        },
+                        slate: {
+                            light: '#8892b0', // Secondary text
+                            lighter: '#ccd6f6', // Primary text
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-navy-900 text-slate-light font-sans antialiased selection:bg-accent selection:text-navy-900">
+
+    <!-- Particles Canvas -->
+    <canvas id="particlesCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none"></canvas>
+
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 px-6 md:px-12 lg:px-24 py-4 flex justify-between items-center backdrop-blur-sm bg-navy-900/80">
+        <a href="#hero" class="text-accent font-mono text-xl font-bold hover:text-slate-lighter transition-colors">
+            &lt;Qal /&gt;
+        </a>
+
+        <ul class="hidden md:flex space-x-8 font-mono text-sm">
+            <li><a href="#about" class="hover:text-accent transition-colors"><span class="text-accent">01.</span> About</a></li>
+            <li><a href="#projects" class="hover:text-accent transition-colors"><span class="text-accent">02.</span> Projects</a></li>
+            <li><a href="#skills" class="hover:text-accent transition-colors"><span class="text-accent">03.</span> Skills</a></li>
+            <li><a href="#contact" class="hover:text-accent transition-colors"><span class="text-accent">04.</span> Contact</a></li>
+        </ul>
+
+        <div class="md:hidden">
+            <a href="#contact" class="px-4 py-2 border border-accent text-accent text-xs rounded hover:bg-accent/10 transition-colors">
+                Contact
+            </a>
+        </div>
+    </nav>
+
+    <header id="hero" class="min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-24 pt-16">
+        <div class="max-w-4xl w-full fade-in-section">
+            <p class="font-mono text-accent mb-5 text-sm md:text-base">Hi, my name is</p>
+            <h1 class="text-5xl md:text-7xl font-bold text-slate-lighter mb-4 tracking-tight">
+                Anaking Faiqal Lufi.
+            </h1>
+            <h2 class="text-4xl md:text-6xl font-bold text-slate-light mb-6">
+                I build scalable systems.
+            </h2>
+            <p class="max-w-xl text-lg md:text-xl leading-relaxed mb-8">
+                I am a specialized software engineer focusing on backend architecture, system design, and machine learning. I transform complex data into elegant digital experiences.
+            </p>
+            
+            <div class="flex flex-wrap gap-4 font-mono text-sm">
+                <span class="px-4 py-2 border border-accent text-accent rounded hover:bg-accent/10 transition-colors cursor-default">
+                    Backend Engineer
+                </span>
+                <span class="px-4 py-2 border border-accent text-accent rounded hover:bg-accent/10 transition-colors cursor-default">
+                    System Design
+                </span>
+                <span class="px-4 py-2 border border-accent text-accent rounded hover:bg-accent/10 transition-colors cursor-default">
+                    AI / ML
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="py-24 px-6 md:px-12 lg:px-24">
+            <div class="max-w-4xl mx-auto fade-in-section">
+                <div class="flex items-center mb-12">
+                    <span class="font-mono text-accent text-xl mr-2">01.</span>
+                    <h2 class="text-3xl font-bold text-slate-lighter whitespace-nowrap">About Me</h2>
+                    <div class="h-[1px] bg-navy-700 w-full ml-6"></div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="md:col-span-2 text-lg leading-relaxed space-y-4">
+                        <p>
+                            Hello! I’m a software developer focused on building reliable and well-structured applications, with an additional specialization in AI and machine learning. I have experience working on real-world projects, designing back-end services, APIs, and data-driven systems, while exploring how AI/ML can be applied to solve practical problems.
+                        </p>
+                        <p>
+                             I value clean architecture, clear communication, and writing maintainable code that can scale and evolve over time, with the goal of delivering software that creates real and measurable impact.
+                        </p>
+                    </div>
+                    <div class="md:col-span-1 flex justify-center md:justify-start relative group">
+                        <div class="relative w-48 h-48 md:w-full md:h-auto max-w-[250px] aspect-square">
+                            <div class="absolute inset-0 border-2 border-accent rounded translate-x-3 translate-y-3 transition-transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
+                            <div class="absolute inset-0 bg-accent/20 hover:bg-transparent transition-colors rounded overflow-hidden">
+                                <img src="assets/profile.png" alt="Profile Photo" class="w-full h-full object-cover rounded filter grayscale hover:grayscale-0 transition-all duration-300">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-24 px-6 md:px-12 lg:px-24 bg-navy-900">
+            <div class="max-w-7xl mx-auto fade-in-section">
+                <div class="flex items-center mb-12">
+                    <span class="font-mono text-accent text-xl mr-2">02.</span>
+                    <h2 class="text-3xl font-bold text-slate-lighter">Featured Projects</h2>
+                    <div class="h-[1px] bg-navy-700 w-full ml-6"></div>
+                </div>
+
+                <div class="relative">
+                    <!-- Left Arrow -->
+                    <button id="projectsCarouselPrev" class="absolute -left-8 md:-left-10 top-1/2 transform -translate-y-1/2 z-20 p-2 hover:text-accent transition-colors text-slate-light">
+                        <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Projects Carousel Container -->
+                    <div id="projectsCarousel" class="overflow-hidden">
+                        <div class="flex gap-6 transition-transform duration-500 ease-out">
+                    <div class="project-card flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 bg-navy-800 rounded-lg p-6 hover:-translate-y-2 transition-transform duration-300 shadow-xl">
+                        <div class="h-40 bg-navy-700 rounded mb-4 overflow-hidden relative">
+                             <img src="assets/ComputerVision-thumbnail.png" alt="Project Thumbnail" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-lighter mb-2">Live CCTV Traffic Object Detection System</h3>
+                        <p class="text-sm mb-4">A real-time traffic monitoring system that leverages computer vision to detect, track, and classify vehicles from live video streams. The system processes visual data to identify different vehicle types, enabling traffic flow analysis and data-driven insights</p>
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-accent">
+                            <span>YOLO</span>
+                            <span>Python</span>
+                            <span>FastAPI</span>
+                            <span>Docker</span>
+                            <span>CI/CD</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 bg-navy-800 rounded-lg p-6 hover:-translate-y-2 transition-transform duration-300 shadow-xl">
+                        <div class="h-40 bg-navy-700 rounded mb-4 overflow-hidden relative">
+                             <img src="assets/Gloo-thumbnail.png" alt="Project Thumbnail" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-lighter mb-2">Gloo - Daily Blood Sugar Management App</h3>
+                        <p class="text-sm mb-4">Gloo is a mobile health application that helps users make healthier choices and reduce diabetes risk by analyzing packaged food sugar content using computer vision, providing nutritional grades (A–D), expert consultations, and a sugar level tracker for health monitoring.</p>
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-accent">
+                            <span>YOLO</span>
+                            <span>Python</span>
+                            <span>FastAPI</span>
+                            <span>Docker</span>
+                            <span>CI/CD</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 bg-navy-800 rounded-lg p-6 hover:-translate-y-2 transition-transform duration-300 shadow-xl">
+                        <div class="h-40 bg-navy-700 rounded mb-4 overflow-hidden relative">
+                             <img src="assets/ClipzoManager-thumbnail.png" alt="Project Thumbnail" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-lighter mb-2">Barbershop Management System - Clipzo Manager</h3>
+                        <p class="text-sm mb-4">Designed, built, and deployed a full-stack application for managing barbershop operations.</p>
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-accent">
+                            <span>PHP</span>
+                            <span>Laravel</span>
+                            <span>Livewire</span>
+                            <span>PostgreSQL</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 bg-navy-800 rounded-lg p-6 hover:-translate-y-2 transition-transform duration-300 shadow-xl">
+                        <div class="h-40 bg-navy-700 rounded mb-4 overflow-hidden relative">
+                             <img src="assets/Tracktion-thumbnail.png" alt="Project Thumbnail" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-lighter mb-2">Fleet Management System - Tracktion</h3>
+                        <p class="text-sm mb-4">Designed and implemented a comprehensive fleet management solution with location tracking and asset management.</p>
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-accent">
+                            <span>Node.js</span>
+                            <span>Google Maps API</span>
+                            <span>Google Cloud Platform</span>
+                            <span>PostgreSQL</span>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Arrow -->
+                    <button id="projectsCarouselNext" class="absolute -right-8 md:-right-10 top-1/2 transform -translate-y-1/2 z-20 p-2 hover:text-accent transition-colors text-slate-light">
+                        <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-24 px-6 md:px-12 lg:px-24">
+            <div class="max-w-4xl mx-auto fade-in-section">
+                <div class="flex items-center mb-12">
+                    <span class="font-mono text-accent text-xl mr-2">03.</span>
+                    <h2 class="text-3xl font-bold text-slate-lighter">Technical Skills</h2>
+                    <div class="h-[1px] bg-navy-700 w-full ml-6"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:justify-between gap-12">
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-lighter mb-4 flex items-center">
+                            <span class="text-accent text-sm mr-2">▹</span> Backend & Systems
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-badge">Node.js</span>
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">Go</span>
+                            <span class="skill-badge">Microservices</span>
+                            <span class="skill-badge">REST APIs</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-lighter mb-4 flex items-center">
+                            <span class="text-accent text-sm mr-2">▹</span> Database & Cloud
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-badge">PostgreSQL</span>
+                            <span class="skill-badge">MongoDB</span>
+                            <span class="skill-badge">GCP</span>
+                            <span class="skill-badge">Docker</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-lighter mb-4 flex items-center">
+                            <span class="text-accent text-sm mr-2">▹</span> Tools & DevOps
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-badge">Git / GitHub</span>
+                            <span class="skill-badge">CI/CD Pipelines</span>
+                            <span class="skill-badge">Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-32 px-6 text-center">
+            <div class="max-w-2xl mx-auto fade-in-section">
+                <span class="font-mono text-accent text-sm mb-4 block">04. What's Next?</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-lighter mb-6">Get In Touch</h2>
+                <p class="text-lg mb-12">
+                    I am currently looking for new opportunities in backend development and system architecture. Whether you have a question or just want to say hi, my inbox is always open.
+                </p>
+                
+                <a href="mailto:faiqalanaking@gmail.com" class="px-8 py-4 border border-accent text-accent font-mono rounded hover:bg-accent/10 transition-colors duration-300">
+                    Say Hello
+                </a>
+
+                <div class="mt-16 flex justify-center gap-8 text-slate-light">
+                    <a href="https://github.com/itsqal" class="hover:text-accent hover:-translate-y-1 transition-all duration-300">
+                        <span class="font-mono text-sm">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/anaking-faiqal/" class="hover:text-accent hover:-translate-y-1 transition-all duration-300">
+                        <span class="font-mono text-sm">LinkedIn</span>
+                    </a>
+                    <a href="https://www.instagram.com/anakingfl/" class="hover:text-accent hover:-translate-y-1 transition-all duration-300">
+                        <span class="font-mono text-sm">Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-6 text-center text-xs font-mono text-slate-light opacity-70">
+        <p>Designed & Built by [Your Name]</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="carousel-navigation.js"></script>
+</body>
+</html>
