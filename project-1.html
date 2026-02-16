@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Project — Live CCTV Traffic Object Detection System</title>
+    
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						navy: {
+							900: '#0a192f',
+							800: '#112240',
+							700: '#233554',
+						},
+						accent: { DEFAULT: '#64ffda' },
+						slate: { light: '#8892b0', lighter: '#ccd6f6' }
+					},
+					fontFamily: {
+						sans: ['Inter', 'system-ui', 'sans-serif'],
+						mono: ['Fira Code', 'monospace'],
+					}
+				}
+			}
+		}
+	</script>
+
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-navy-900 text-slate-light font-sans antialiased selection:bg-accent selection:text-navy-900">
+
+	<nav class="fixed w-full top-0 z-50 transition-all duration-300 px-6 md:px-12 lg:px-24 py-4 flex justify-between items-center backdrop-blur-sm bg-navy-900/80">
+		<a href="index.html" class="text-accent font-mono text-xl font-bold hover:text-slate-lighter transition-colors">&lt;Qal /&gt;</a>
+		<ul class="hidden md:flex space-x-8 font-mono text-sm">
+			<li><a href="index.html#about" class="hover:text-accent transition-colors"><span class="text-accent">01.</span> About</a></li>
+			<li><a href="index.html#projects" class="hover:text-accent transition-colors"><span class="text-accent">02.</span> Projects</a></li>
+			<li><a href="index.html#skills" class="hover:text-accent transition-colors"><span class="text-accent">03.</span> Skills</a></li>
+			<li><a href="index.html#contact" class="hover:text-accent transition-colors"><span class="text-accent">04.</span> Contact</a></li>
+		</ul>
+		<div class="md:hidden">
+			<a href="index.html#contact" class="px-4 py-2 border border-accent text-accent text-xs rounded hover:bg-accent/10 transition-colors">Contact</a>
+		</div>
+	</nav>
+
+	<header class="pt-24"></header>
+
+	<main class="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 py-12">
+		<article class="bg-navy-800 rounded-lg p-6 lg:p-10 shadow-lg">
+			<div class="mb-6">
+				<h1 class="text-3xl md:text-4xl font-bold text-slate-lighter">Live CCTV Traffic Object Detection System</h1>
+				<h2 class="text-lg md:text-xl text-slate-light mt-2">Real-time vehicle detection, tracking, and analytics</h2>
+			</div>
+
+			<!-- Main Thumbnail -->
+			<div class="w-full rounded overflow-hidden mb-6 border border-navy-700">
+				<img src="assets/ComputerVision-thumbnail.png" alt="Project Thumbnail" class="w-full h-64 md:h-96 object-cover">
+			</div>
+
+			<!-- Article / Narrative -->
+			<section class="prose prose-invert max-w-none text-base leading-relaxed space-y-4 mb-8">
+				<p class="font-mono text-accent text-sm mb-2">PROJECT CASE STUDY</p>
+
+				<h3 class="text-xl font-semibold mt-4">Project Overview</h3>
+				<p>
+					This project focuses on building a real-time computer vision system using CCTV cameras to support business monitoring and data-driven decision-making.
+				</p>
+				<p>
+					The system was developed during my internship, where I was involved in delivering production-oriented machine learning solutions rather than purely experimental models. The solution leverages object detection to extract actionable insights from live camera feeds, enabling businesses to monitor performance, behavior, and traffic patterns in real-world environments.
+				</p>
+				<p>
+					The main objective was to design and deploy a scalable machine learning system that could operate reliably under real-world constraints while delivering measurable business value.
+				</p>
+
+				<h3 class="text-xl font-semibold mt-4">Business Problem</h3>
+				<p>
+					This project addressed a business use case from a food &amp; beverage client planning to open over 100 outlets across Jakarta. They needed objective traffic data to identify optimal store locations. Manual observation and assumptions introduced high business risk, so automated, scalable traffic analysis from CCTV footage was required.
+				</p>
+
+				<h3 class="text-xl font-semibold mt-4">Key Challenges</h3>
+				<ul>
+					<li>- Large volumes of unstructured image data and the need to process footage in near real-time.</li>
+					<li>- <b>Data annotation bottleneck:</b> thousands of images requiring bounding box labels with multiple objects per image.</li>
+					<li>- <b>Data quality variability:</b> differing lighting, angles, resolution, and occlusion affecting model performance.</li>
+					<li>- <b>Delivery expectations:</b> production-ready system requirements despite internship constraints.</li>
+				</ul>
+
+				<h3 class="text-xl font-semibold mt-4">Technical Approach</h3>
+				<p>
+					I designed an end-to-end machine learning lifecycle emphasizing iteration, scalability, and deployment readiness. The strategy focused on building a system that could continuously improve via iterative data collection and model refinement while remaining practical to deploy in production.
+				</p>
+
+				<h3 class="text-xl font-semibold mt-4">Machine Learning Lifecycle</h3>
+				<ol class="list-decimal ml-6">
+					<li>Data collection from real CCTV camera feeds</li>
+					<li>Manual labeling on an initial subset of images</li>
+					<li>Training an initial object detection model</li>
+					<li>Using the trained model to assist auto-annotation</li>
+					<li>Refining labels and retraining stronger models</li>
+					<li>Deploying the model as an API for real-world testing</li>
+				</ol>
+
+				<h3 class="text-xl font-semibold mt-4">Assisted Data Annotation Solution</h3>
+                <div class="w-full rounded mb-6 flex justify-center border border-white bg-white p-8">
+                    <img src="assets/project1/ml_lifecycle_iterative_diagram.png" alt="Project Thumbnail" >
+                </div>
+				<p>
+					To address the annotation bottleneck, I designed and built a GUI-based annotation tool that passed thousands of images through an existing trained model to generate auto-annotations. These were reviewed and exported in YOLO format, substantially reducing manual labeling time and cost. The solution received positive feedback from a senior AI engineer for its practicality.
+				</p>
+
+				<h3 class="text-xl font-semibold mt-4">Model and Framework Selection</h3>
+				<p>
+					For object detection I chose YOLO (Ultralytics) because of its stability, active community, availability of pre-trained models, and fast training/inference suitable for real-time applications.
+				</p>
+
+				<h3 class="text-xl font-semibold mt-4">Deployment and System Integration</h3>
+                <div class="w-full rounded mb-6 flex justify-center border border-white bg-white p-8">
+                    <img src="assets/project1/system_architecture_cctv_ml.png" alt="Project Thumbnail" >
+                </div>
+				<p>
+					The trained model was containerized with Docker and exposed via RESTful APIs using FastAPI and Flask. This enabled seamless integration with frontend dashboards and consistent deployment across environments, allowing pilot testing in multiple real-world locations.
+				</p>
+
+				<h3 class="text-xl font-semibold mt-4">Tech Stack Summary</h3>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+					<div>
+						<strong class="text-slate-lighter">Machine Learning &amp; Computer Vision</strong>
+						<ul class="list-disc ml-6 mt-2">
+							<li>YOLO (Ultralytics)</li>
+							<li>Object Detection</li>
+							<li>Computer Vision</li>
+						</ul>
+					</div>
+					<div>
+						<strong class="text-slate-lighter">Programming &amp; Data Tools</strong>
+						<ul class="list-disc ml-6 mt-2">
+							<li>Python</li>
+							<li>Jupyter Notebook</li>
+							<li>OpenCV</li>
+						</ul>
+					</div>
+					<div>
+						<strong class="text-slate-lighter">Deployment &amp; Systems</strong>
+						<ul class="list-disc ml-6 mt-2">
+							<li>FastAPI</li>
+							<li>Flask</li>
+							<li>Docker</li>
+							<li>RESTful APIs</li>
+						</ul>
+					</div>
+				</div>
+
+				<h3 class="text-xl font-semibold mt-4">Lessons Learned</h3>
+				<ul>
+					<li>- Data quality and annotation strategy are as important as model selection.</li>
+					<li>- Iterative development enables faster learning and better results.</li>
+					<li>- Clear communication between technical and non-technical stakeholders is critical.</li>
+					<li>- Deployment and system integration are essential for real business impact.</li>
+				</ul>
+
+				<h3 class="text-xl font-semibold mt-4">Closing</h3>
+				<p>
+					This project strengthened my interest in building data-driven systems that operate in real-world environments, where practical constraints, trade-offs, and measurable impact matter as much as algorithms.
+				</p>
+			</section>
+
+			<!-- Tech Stack -->
+			<footer class="pt-6 border-t border-navy-700 mt-6">
+				<h4 class="font-mono text-accent text-sm mb-3">Tech Stack</h4>
+				<div class="flex flex-wrap gap-3">
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">Python</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">YOLO / Computer Vision</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">FastAPI</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">Docker</span>
+				</div>
+
+				<div class="mt-6 flex justify-between items-center">
+					<a href="index.html" class="font-mono text-sm text-accent hover:underline">← Back to projects</a>
+					<div class="text-sm text-slate-light">Last updated: Feb 2026</div>
+				</div>
+			</footer>
+		</article>
+	</main>
+
+	<footer class="py-6 text-center text-xs font-mono text-slate-light opacity-70">
+		<p>Designed & Built by Faiqal</p>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
