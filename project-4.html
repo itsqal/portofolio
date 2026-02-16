@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Project — Live CCTV Traffic Object Detection System</title>
-    
+	<title>Project — Tracktion Fleet Management System</title>
+
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script>
 		tailwind.config = {
@@ -29,71 +28,121 @@
 		}
 	</script>
 
-	<link rel="stylesheet" href="style.css">
 	<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body class="bg-navy-900 text-slate-light font-sans antialiased selection:bg-accent selection:text-navy-900">
 
-	<nav class="fixed w-full top-0 z-50 transition-all duration-300 px-6 md:px-12 lg:px-24 py-4 flex justify-between items-center backdrop-blur-sm bg-navy-900/80">
-		<a href="index.html" class="text-accent font-mono text-xl font-bold hover:text-slate-lighter transition-colors">&lt;Qal /&gt;</a>
+<body class="bg-navy-900 text-slate-light font-sans antialiased">
+
+	<nav class="fixed w-full top-0 z-50 px-6 md:px-12 lg:px-24 py-4 flex justify-between items-center backdrop-blur-sm bg-navy-900/80">
+		<a href="index.html" class="text-accent font-mono text-xl font-bold">&lt;Qal /&gt;</a>
 		<ul class="hidden md:flex space-x-8 font-mono text-sm">
-			<li><a href="index.html#about" class="hover:text-accent transition-colors"><span class="text-accent">01.</span> About</a></li>
-			<li><a href="index.html#projects" class="hover:text-accent transition-colors"><span class="text-accent">02.</span> Projects</a></li>
-			<li><a href="index.html#skills" class="hover:text-accent transition-colors"><span class="text-accent">03.</span> Skills</a></li>
-			<li><a href="index.html#contact" class="hover:text-accent transition-colors"><span class="text-accent">04.</span> Contact</a></li>
+			<li><a href="index.html#projects" class="hover:text-accent"><span class="text-accent">02.</span> Projects</a></li>
+			<li><a href="index.html#contact" class="hover:text-accent"><span class="text-accent">04.</span> Contact</a></li>
 		</ul>
-		<div class="md:hidden">
-			<a href="index.html#contact" class="px-4 py-2 border border-accent text-accent text-xs rounded hover:bg-accent/10 transition-colors">Contact</a>
-		</div>
 	</nav>
 
 	<header class="pt-24"></header>
 
 	<main class="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 py-12">
 		<article class="bg-navy-800 rounded-lg p-6 lg:p-10 shadow-lg">
+
+			<!-- Title -->
 			<div class="mb-6">
-				<h1 class="text-3xl md:text-4xl font-bold text-slate-lighter">Live CCTV Traffic Object Detection System</h1>
-				<h2 class="text-lg md:text-xl text-slate-light mt-2">Real-time vehicle detection, tracking, and analytics</h2>
+				<h1 class="text-3xl md:text-4xl font-bold text-slate-lighter">
+					Tracktion — Fleet Management System
+				</h1>
+				<h2 class="text-lg md:text-xl text-slate-light mt-2">
+					Backend system for tracking logistics fleet assets
+				</h2>
 			</div>
 
-			<!-- Main Thumbnail -->
-			<div class="w-full rounded overflow-hidden mb-6 border border-navy-700">
-				<img src="assets/ComputerVision-thumbnail.png" alt="Project Thumbnail" class="w-full h-64 md:h-96 object-cover">
+			<!-- Thumbnail -->
+			<div class="w-full rounded overflow-hidden mb-8 border border-navy-700">
+				<img src="assets/Tracktion-thumbnail.png" alt="Tracktion Project Thumbnail"
+				     class="w-full h-64 md:h-96 object-cover">
 			</div>
 
-			<!-- Article / Narrative -->
-			<section class="prose prose-invert max-w-none text-base leading-relaxed space-y-4 mb-8">
-				<p>Write your project overview, goals, and narrative here. Describe the problem, your approach, and the outcomes. Use multiple paragraphs, headings, and images as needed.</p>
+			<!-- Article Content -->
+			<section class="prose prose-invert max-w-none text-base leading-relaxed space-y-5">
 
-				<h3 class="text-xl font-semibold mt-4">Implementation</h3>
-				<p>Explain architecture, models, datasets, and implementation details. This area can contain code snippets, diagrams, or screenshots.</p>
+				<h3 class="text-xl font-semibold">Project Overview</h3>
+				<p>
+					Tracktion is a fleet management system developed for a logistics company that required a
+					digital solution to monitor and manage their truck assets. The main objective of this
+					project was to provide real-time visibility into fleet locations and operational movement
+					through a centralized system.
+				</p>
 
-				<figure class="my-6">
-					<img src="assets/diagram-placeholder.png" alt="Diagram" class="w-full rounded border border-navy-700 object-contain">
-					<figcaption class="text-sm text-slate-light mt-2">Diagram / architecture (replace with your image)</figcaption>
+				<h3 class="text-xl font-semibold">Business Problem</h3>
+				<p>
+					The client previously relied on manual tracking and fragmented tools to monitor fleet
+					operations, making it difficult to understand asset utilization, delivery routes, and
+					operational efficiency. They needed a backend system capable of processing location data,
+					transforming it into meaningful geographic insights, and serving this information reliably
+					to a frontend dashboard.
+				</p>
+
+				<h3 class="text-xl font-semibold">Technical Challenges</h3>
+				<ul class="list-disc pl-6">
+					<li>Processing and managing continuous geolocation data from fleet tracking devices</li>
+					<li>Translating raw latitude and longitude into readable location information</li>
+					<li>Calculating travel distances accurately for operational insights</li>
+					<li>Designing a backend API that could scale and remain reliable</li>
+				</ul>
+
+				<h3 class="text-xl font-semibold">Technical Approach</h3>
+				<figure class="my-6 flex justify-center bg-white p-4">
+					<img src="assets/project4/tracktion_system_architecture.png" alt="System Architecture Diagram">
 				</figure>
+				<p>
+					I worked as a backend developer and designed the system using a Node.js-based API architecture.
+					The backend receives GPS coordinates from tracking devices, processes the data, and integrates
+					with Google Maps API to perform reverse geocoding and distance calculations.
+				</p>
 
-				<h3 class="text-xl font-semibold mt-4">Results & Metrics</h3>
-				<p>Summarize evaluation metrics, performance, and lessons learned.</p>
+				<p>
+					Processed data is stored in PostgreSQL, allowing structured querying of fleet history,
+					locations, and movement patterns. The backend exposes RESTful APIs that are consumed by
+					a frontend dashboard for real-time visualization and monitoring.
+				</p>
+
+				<h3 class="text-xl font-semibold">Deployment</h3>
+				<p>
+					The backend service was deployed on Google Cloud Platform using App Engine, enabling
+					easy scalability and managed infrastructure. This setup allowed the frontend application
+					to consume APIs reliably while keeping operational overhead minimal.
+				</p>
+
+				<h3 class="text-xl font-semibold">Lessons Learned</h3>
+				<p>
+					This project strengthened my understanding of geospatial data processing, API design,
+					and cloud-based deployment. I also learned how to translate logistics business needs into
+					clear technical requirements and build a backend system that directly supports operational
+					decision-making.
+				</p>
+
 			</section>
 
 			<!-- Tech Stack -->
-			<footer class="pt-6 border-t border-navy-700 mt-6">
+			<footer class="pt-6 border-t border-navy-700 mt-8">
 				<h4 class="font-mono text-accent text-sm mb-3">Tech Stack</h4>
 				<div class="flex flex-wrap gap-3">
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">Python</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">YOLO / Computer Vision</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">FastAPI</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">Docker</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light border border-transparent">PostgreSQL</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">Node.js</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">PostgreSQL</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">Google Maps API</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">RESTful API</span>
+					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">GCP App Engine</span>
 				</div>
 
 				<div class="mt-6 flex justify-between items-center">
-					<a href="index.html" class="font-mono text-sm text-accent hover:underline">← Back to projects</a>
-					<div class="text-sm text-slate-light">Last updated: —</div>
+					<a href="index.html#projects" class="font-mono text-sm text-accent hover:underline">
+						← Back to projects
+					</a>
+					<div class="text-sm text-slate-light">Documentation last updated on: Feb 2026</div>
 				</div>
 			</footer>
+
 		</article>
 	</main>
 
@@ -101,6 +150,5 @@
 		<p>Designed & Built by Faiqal</p>
 	</footer>
 
-	<script src="script.js"></script>
 </body>
 </html>
