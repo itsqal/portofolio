@@ -28,6 +28,7 @@
 		}
 	</script>
 
+	<link rel="stylesheet" href="style.css">
 	<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
@@ -35,11 +36,18 @@
 <body class="bg-navy-900 text-slate-light font-sans antialiased">
 
 	<nav class="fixed w-full top-0 z-50 px-6 md:px-12 lg:px-24 py-4 flex justify-between items-center backdrop-blur-sm bg-navy-900/80">
-		<a href="index.html" class="text-accent font-mono text-xl font-bold">&lt;Qal /&gt;</a>
-		<ul class="hidden md:flex space-x-8 font-mono text-sm">
-			<li><a href="index.html#projects" class="hover:text-accent"><span class="text-accent">02.</span> Projects</a></li>
-			<li><a href="index.html#contact" class="hover:text-accent"><span class="text-accent">04.</span> Contact</a></li>
+		<a href="index.html" class="text-accent font-mono text-xl font-bold hover:text-slate-lighter transition-colors">&lt;Qal /&gt;</a>
+		<ul class="hidden md:flex md:space-x-5 lg:space-x-8 font-mono text-xs lg:text-sm">
+			<li><a href="index.html#about" class="hover:text-accent transition-colors"><span class="text-accent">01.</span> About</a></li>
+			<li><a href="index.html#experience" class="hover:text-accent transition-colors"><span class="text-accent">02.</span> Experience</a></li>
+			<li><a href="index.html#education" class="hover:text-accent transition-colors"><span class="text-accent">03.</span> Education</a></li>
+			<li><a href="index.html#projects" class="hover:text-accent transition-colors"><span class="text-accent">04.</span> Projects</a></li>
+			<li><a href="index.html#skills" class="hover:text-accent transition-colors"><span class="text-accent">05.</span> Skills</a></li>
+			<li><a href="index.html#contact" class="hover:text-accent transition-colors"><span class="text-accent">06.</span> Contact</a></li>
 		</ul>
+		<div class="md:hidden">
+			<a href="index.html#contact" class="px-4 py-2 border border-accent text-accent text-xs rounded hover:bg-accent/10 transition-colors">Contact</a>
+		</div>
 	</nav>
 
 	<header class="pt-24"></header>
