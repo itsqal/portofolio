@@ -1,179 +1,166 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Project — Clipzo Manager</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipzo Manager — Anaking Faiqal Lufi</title>
+    <meta name="description" content="Internal business management system for barbershop operations">
+    <meta name="author" content="Anaking Faiqal Lufi">
+    <meta name="theme-color" content="#ffffff">
 
-	<script src="https://cdn.tailwindcss.com"></script>
-	<script>
-		tailwind.config = {
-			theme: {
-				extend: {
-					colors: {
-						navy: {
-							900: '#0a192f',
-							800: '#112240',
-							700: '#233554',
-						},
-						accent: { DEFAULT: '#64ffda' },
-						slate: { light: '#8892b0', lighter: '#ccd6f6' }
-					},
-					fontFamily: {
-						sans: ['Inter', 'system-ui', 'sans-serif'],
-						mono: ['Fira Code', 'monospace'],
-					}
-				}
-			}
-		}
-	</script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-	<link rel="stylesheet" href="style.css">
-	<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Set the theme before first paint so the page never flashes. -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'dark' || saved === 'light') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                }
+            } catch (e) { /* private mode: fall through to the light default */ }
+        })();
+    </script>
 </head>
+<body>
 
-<body class="bg-navy-900 text-slate-light font-sans antialiased">
+    <header class="masthead">
+        <div class="wrap masthead-inner">
+            <a class="wordmark" href="index.html">Anaking Faiqal</a>
 
-	<nav class="fixed w-full top-0 z-50 px-6 md:px-12 lg:px-24 py-4 flex justify-between items-center backdrop-blur-sm bg-navy-900/80">
-		<a href="index.html" class="text-accent font-mono text-xl font-bold hover:text-slate-lighter transition-colors">&lt;Qal /&gt;</a>
-		<ul class="hidden md:flex md:space-x-5 lg:space-x-8 font-mono text-xs lg:text-sm">
-			<li><a href="index.html#about" class="hover:text-accent transition-colors"><span class="text-accent">01.</span> About</a></li>
-			<li><a href="index.html#experience" class="hover:text-accent transition-colors"><span class="text-accent">02.</span> Experience</a></li>
-			<li><a href="index.html#education" class="hover:text-accent transition-colors"><span class="text-accent">03.</span> Education</a></li>
-			<li><a href="index.html#projects" class="hover:text-accent transition-colors"><span class="text-accent">04.</span> Projects</a></li>
-			<li><a href="index.html#skills" class="hover:text-accent transition-colors"><span class="text-accent">05.</span> Skills</a></li>
-			<li><a href="index.html#contact" class="hover:text-accent transition-colors"><span class="text-accent">06.</span> Contact</a></li>
-		</ul>
-		<div class="md:hidden">
-			<a href="index.html#contact" class="px-4 py-2 border border-accent text-accent text-xs rounded hover:bg-accent/10 transition-colors">Contact</a>
-		</div>
-	</nav>
+            <nav aria-label="Sections">
+                <a href="index.html#about">About</a>
+                <a href="index.html#experience">Experience</a>
+                <a href="index.html#education">Education</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#skills">Skills</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
 
-	<header class="pt-24"></header>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+                <span class="visually-hidden">Switch to dark mode</span>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2"></circle>
+                    <path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
 
-	<main class="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 py-12">
-		<article class="bg-navy-800 rounded-lg p-6 lg:p-10 shadow-lg">
+    <main class="wrap article">
+        <article>
+            <div class="article-head">
+                <h1>Clipzo Manager</h1>
+                <p class="standfirst">Internal business management system for barbershop operations</p>
+                <div class="article-meta">
+                    <span>Laravel (PHP)</span>
+                    <span>PostgreSQL</span>
+                    <span>RESTful API</span>
+                    <span>VPS Deployment</span>
+                    <span>Custom Domain</span>
+                </div>
+            </div>
 
-			<!-- Title -->
-			<div class="mb-6">
-				<h1 class="text-3xl md:text-4xl font-bold text-slate-lighter">
-					Clipzo Manager
-				</h1>
-				<h2 class="text-lg md:text-xl text-slate-light mt-2">
-					Internal business management system for barbershop operations
-				</h2>
-			</div>
+            <figure class="figure figure--lead">
+                <img src="assets/ClipzoManager-thumbnail.png" alt="" width="1600" height="1000">
+            </figure>
 
-			<!-- Thumbnail -->
-			<div class="w-full rounded overflow-hidden mb-8 border border-navy-700">
-				<img src="assets/ClipzoManager-thumbnail.png" alt="Clipzo Manager Preview"
-					class="w-full h-64 md:h-96 object-cover">
-			</div>
+            <section class="prose">
+                <h2>Project Overview</h2>
+                <p>
+                Clipzo Manager is an internal web-based management system developed as a freelance project
+                for a local barbershop in Bandung. The client needed a centralized system to manage daily
+                operations, including financial records, service catalogs, and overall business performance
+                monitoring.
+                </p>
+                <p>
+                The primary goal of this project was to deliver a reliable and usable solution in a short
+                timeframe while ensuring that the system could support real operational workflows. Until today,
+                the system is still actively used in production.
+                </p>
 
-			<!-- Content -->
-			<section class="prose prose-invert max-w-none text-base leading-relaxed space-y-6">
+                <h2>Business Problem</h2>
+                <p>
+                Before Clipzo Manager, most operational activities were handled manually or through scattered
+                tools. This caused difficulties in tracking revenue, monitoring employee performance, and
+                maintaining consistent operational data.
+                </p>
+                <p>
+                The barbershop also required integration with an existing HRIS system to manage employee
+                and capster data, making system interoperability a key requirement.
+                </p>
 
-				<h3 class="text-xl font-semibold">Project Overview</h3>
-				<p>
-					Clipzo Manager is an internal web-based management system developed as a freelance project
-					for a local barbershop in Bandung. The client needed a centralized system to manage daily
-					operations, including financial records, service catalogs, and overall business performance
-					monitoring.
-				</p>
-				<p>
-					The primary goal of this project was to deliver a reliable and usable solution in a short
-					timeframe while ensuring that the system could support real operational workflows. Until today,
-					the system is still actively used in production.
-				</p>
+                <h2>Challenges</h2>
+                <ul>
+                <li>Delivering a complete and usable system under tight deadlines.</li>
+                <li>Translating non-technical business requirements into clear technical specifications.</li>
+                <li>Designing a system that could integrate with an external HRIS platform.</li>
+                <li>Ensuring the application was stable, secure, and ready for real operational use.</li>
+                </ul>
 
-				<h3 class="text-xl font-semibold">Business Problem</h3>
-				<p>
-					Before Clipzo Manager, most operational activities were handled manually or through scattered
-					tools. This caused difficulties in tracking revenue, monitoring employee performance, and
-					maintaining consistent operational data.
-				</p>
-				<p>
-					The barbershop also required integration with an existing HRIS system to manage employee
-					and capster data, making system interoperability a key requirement.
-				</p>
+                <h2>Technical Approach</h2>
+                <figure class="figure"><img src="assets/project3/clipzo_system_architecture.png" alt="System Architecture Diagram"></figure>
+                <p>
+                I designed and implemented the system as a full-stack web application using Laravel
+                and PostgreSQL. Laravel was chosen for its robustness, ecosystem maturity, and ability to
+                deliver features quickly without sacrificing maintainability.
+                </p>
+                <p>
+                The system architecture was designed around modular services, allowing financial data,
+                catalog management, and employee records to be handled independently while remaining
+                connected through a unified backend.
+                </p>
 
-				<h3 class="text-xl font-semibold">Challenges</h3>
-				<ul class="list-disc pl-6">
-					<li>Delivering a complete and usable system under tight deadlines.</li>
-					<li>Translating non-technical business requirements into clear technical specifications.</li>
-					<li>Designing a system that could integrate with an external HRIS platform.</li>
-					<li>Ensuring the application was stable, secure, and ready for real operational use.</li>
-				</ul>
+                <p>
+                For deployment, the application was manually deployed to a VPS environment with a custom domain.
+                This involved server configuration, database setup, environment hardening, and ongoing
+                maintenance to ensure system reliability.
+                </p>
 
-				<h3 class="text-xl font-semibold">Technical Approach</h3>
-				<figure class="my-6 flex justify-center bg-white p-4">
-					<img src="assets/project3/clipzo_system_architecture.png" alt="System Architecture Diagram">
-				</figure>
-				<p>
-					I designed and implemented the system as a full-stack web application using Laravel
-					and PostgreSQL. Laravel was chosen for its robustness, ecosystem maturity, and ability to
-					deliver features quickly without sacrificing maintainability.
-				</p>
-				<p>
-					The system architecture was designed around modular services, allowing financial data,
-					catalog management, and employee records to be handled independently while remaining
-					connected through a unified backend.
-				</p>
+                <h2>Results & Impact</h2>
+                <p>
+                The final system enabled the barbershop to monitor revenue streams, manage service catalogs,
+                and track employee-related data from a single platform. Operational visibility improved
+                significantly, allowing the business owner to make more informed decisions.
+                </p>
+                <p>
+                This project also marked an important milestone in my development as a software engineer,
+                as I independently handled the full project lifecycle, from requirement gathering to deployment
+                and post-launch support.
+                </p>
 
-				<p>
-					For deployment, the application was manually deployed to a VPS environment with a custom domain.
-					This involved server configuration, database setup, environment hardening, and ongoing
-					maintenance to ensure system reliability.
-				</p>
+                <h2>Lessons Learned</h2>
+                <ul>
+                <li>Clear communication with non-technical stakeholders is critical to project success.</li>
+                <li>Fast delivery does not have to compromise system structure and maintainability.</li>
+                <li>Building software that is actually used in production requires a strong focus on reliability.</li>
+                <li>Understanding business context is just as important as technical implementation.</li>
+                </ul>
+            </section>
 
-				<h3 class="text-xl font-semibold">Results & Impact</h3>
-				<p>
-					The final system enabled the barbershop to monitor revenue streams, manage service catalogs,
-					and track employee-related data from a single platform. Operational visibility improved
-					significantly, allowing the business owner to make more informed decisions.
-				</p>
-				<p>
-					This project also marked an important milestone in my development as a software engineer,
-					as I independently handled the full project lifecycle, from requirement gathering to deployment
-					and post-launch support.
-				</p>
+            <a class="back-link" href="index.html#projects">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M11 18l-6-6 6-6"></path>
+                </svg>
+                All projects
+            </a>
+        </article>
+    </main>
 
-				<h3 class="text-xl font-semibold">Lessons Learned</h3>
-				<ul class="list-disc pl-6">
-					<li>Clear communication with non-technical stakeholders is critical to project success.</li>
-					<li>Fast delivery does not have to compromise system structure and maintainability.</li>
-					<li>Building software that is actually used in production requires a strong focus on reliability.</li>
-					<li>Understanding business context is just as important as technical implementation.</li>
-				</ul>
+    <footer>
+        <div class="wrap site-foot">
+            <span>Designed and built by Faiqal</span>
+            <span>Last updated Feb 2026</span>
+        </div>
+    </footer>
 
-			</section>
-
-			<!-- Tech Stack -->
-			<footer class="pt-8 border-t border-navy-700 mt-8">
-				<h4 class="font-mono text-accent text-sm mb-3">Tech Stack</h4>
-				<div class="flex flex-wrap gap-3">
-					<span class="px-3 py-1 text-xs rounded bg-navy-700">Laravel (PHP)</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700">PostgreSQL</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700">RESTful API</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700">VPS Deployment</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700">Custom Domain</span>
-				</div>
-
-				<div class="mt-6 flex justify-between items-center">
-					<a href="index.html" class="font-mono text-sm text-accent hover:underline">
-						← Back to projects
-					</a>
-					<div class="text-sm text-slate-light">Documentation last updated on: Feb 2026</div>
-				</div>
-			</footer>
-
-		</article>
-	</main>
-
-	<footer class="py-6 text-center text-xs font-mono text-slate-light opacity-70">
-		<p>Designed & Built by Faiqal</p>
-	</footer>
-
+    <script src="script.js"></script>
 </body>
 </html>

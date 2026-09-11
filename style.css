@@ -1,366 +1,953 @@
-/* ============================================================
-   Anaking Faiqal Lufi — Portfolio styles
-   Palette: navy-900 #0a192f · navy-800 #112240 · navy-700 #233554
-            accent  #64ffda · slate-light #8892b0 · slate-lighter #ccd6f6
-   ============================================================ */
+/* ==========================================================================
+   Anaking Faiqal Lufi — portfolio
+   A run log, not a brochure: time on the left, event on the right.
+   Monochrome by design; the company logos are the only colour on the page.
+   ========================================================================== */
 
-/* Custom Scrollbar for a premium feel */
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: #0a192f;
-}
-::-webkit-scrollbar-thumb {
-    background: #233554;
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #64ffda;
+/* --------------------------------------------------------------------------
+   1. Tokens
+   Light is the default. Dark is a true negative flip — real black, real
+   white — rather than a softened charcoal theme.
+   -------------------------------------------------------------------------- */
+:root {
+    --paper:        #ffffff;
+    --wash:         #f4f4f4;
+    --line:         #e2e2e2;
+    --line-strong:  #c4c4c4;
+    --ink:          #000000;
+    --ink-2:        #565656;
+    --ink-3:        #8c8c8c;
+    --mark-backing: #ffffff;
+    --selection:    #000000;
+    --selection-fg: #ffffff;
+
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --fs-display: clamp(2.5rem, 6.4vw, 4.5rem);
+    --fs-h2:      clamp(1.375rem, 2.4vw, 1.75rem);
+    --fs-h3:      1.125rem;
+    --fs-body:    1.0625rem;
+    --fs-sm:      0.9375rem;
+    --fs-xs:      0.8125rem;
+
+    --rail:   10rem;   /* width of the time column */
+    --gutter: 3rem;
+    --measure: 64ch;   /* comfortable line length for body copy */
+
+    --radius: 4px;
+
+    color-scheme: light;
 }
 
-/* Base Styles */
+[data-theme="dark"] {
+    --paper:        #000000;
+    --wash:         #131313;
+    --line:         #2a2a2a;
+    --line-strong:  #454545;
+    --ink:          #ffffff;
+    --ink-2:        #a8a8a8;
+    --ink-3:        #6f6f6f;
+    --mark-backing: #ffffff;
+    --selection:    #ffffff;
+    --selection-fg: #000000;
+
+    color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   2. Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--ink-2);
+    font-family: var(--sans);
+    font-size: var(--fs-body);
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Only the theme switch should animate these, and only when asked. */
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
+::selection {
+    background: var(--selection);
+    color: var(--selection-fg);
 }
 
-/* Anchor offset so section headings clear the fixed navbar */
-section[id],
-header[id] {
-    scroll-margin-top: 90px;
+h1, h2, h3, h4 {
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0;
 }
 
-/* ------------------------------------------------------------
-   Skill badges
-   (plain CSS — Tailwind's @apply is unavailable via the CDN build)
-   ------------------------------------------------------------ */
-.skill-badge {
-    display: inline-block;
-    background-color: #112240;
-    color: #8892b0;
-    padding: 0.3rem 0.75rem;
-    border-radius: 0.3rem;
-    font-size: 0.8125rem;
-    line-height: 1.3;
-    font-family: 'Fira Code', monospace;
-    border: 1px solid transparent;
-    cursor: default;
-    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-.skill-badge:hover {
-    color: #64ffda;
-    border-color: rgba(100, 255, 218, 0.5);
-    transform: translateY(-2px);
+p { margin: 0; }
+
+a { color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
+
+:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
-/* Small monospace tech chips used inside experience / project cards */
-.tech-chip {
-    display: inline-block;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.6875rem;
-    line-height: 1;
-    letter-spacing: 0.02em;
-    color: #64ffda;
-    background-color: rgba(100, 255, 218, 0.07);
-    border: 1px solid rgba(100, 255, 218, 0.2);
-    border-radius: 999px;
-    padding: 0.35rem 0.65rem;
+.mono {
+    font-family: var(--mono);
+    font-feature-settings: 'tnum' 1;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
     white-space: nowrap;
 }
 
-/* ------------------------------------------------------------
-   Section headings — number, title, then a rule filling the row
-   ------------------------------------------------------------ */
-.section-heading {
-    display: flex;
-    align-items: center;
-    margin-bottom: 3rem;
-}
-.section-heading h2 {
-    min-width: 0;
-}
-.section-heading .rule {
-    flex: 1;
-    height: 1px;
-    background-color: #233554;
-    margin-left: 1.5rem;
+/* --------------------------------------------------------------------------
+   3. Layout
+   -------------------------------------------------------------------------- */
+.wrap {
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 3.5rem);
 }
 
-/* ------------------------------------------------------------
-   Experience timeline
-   ------------------------------------------------------------ */
-.timeline {
-    position: relative;
+.band { padding-block: clamp(2.75rem, 5vw, 4rem); }
+
+/* Section title above a hairline, carrying its number. */
+.band-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 2.5rem;
 }
-/* Vertical rail behind the logo tiles */
-.timeline::before {
+.band-head h2 { font-size: var(--fs-h2); }
+.band-head .band-note {
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    text-align: right;
+}
+
+/* The ledger: time column, then the event. */
+.ledger {
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    gap: 0 var(--gutter);
+}
+.ledger + .ledger { margin-top: 3.5rem; }
+
+.ledger-when {
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    font-feature-settings: 'tnum' 1;
+    color: var(--ink-2);
+    line-height: 1.5;
+    padding-top: 0.3rem;
+}
+.ledger-when .where {
+    display: block;
+    color: var(--ink-3);
+    margin-top: 0.4rem;
+}
+
+@media (max-width: 860px) {
+    .ledger { grid-template-columns: 1fr; gap: 0; }
+    .ledger-when { padding-top: 0; margin-bottom: 0.85rem; }
+    .ledger-when .where { display: inline; margin-top: 0; }
+    .ledger-when .where::before { content: '   '; white-space: pre; }
+}
+
+/* --------------------------------------------------------------------------
+   4. Masthead
+   -------------------------------------------------------------------------- */
+.masthead {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+}
+.masthead-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.9rem;
+}
+.wordmark {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+.masthead nav { display: none; }
+@media (min-width: 900px) {
+    .masthead nav {
+        display: flex;
+        gap: 1.75rem;
+    }
+}
+.masthead nav a {
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+    text-decoration: none;
+    padding-block: 0.15rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+.masthead nav a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+}
+
+.masthead-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: none;
+}
+
+/* Nav collapses below 900px, so the contact link stays reachable there. */
+.contact-mini {
+    font-size: var(--fs-xs);
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 0.35rem 0.75rem;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.contact-mini:hover {
+    background-color: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+}
+@media (min-width: 900px) {
+    .contact-mini { display: none; }
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex: none;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 99px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.theme-toggle:hover {
+    background-color: var(--wash);
+    border-color: var(--ink);
+}
+.theme-toggle svg { width: 17px; height: 17px; }
+/* Show the icon for the mode you'd switch *to*. */
+.theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun  { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
+
+/* --------------------------------------------------------------------------
+   5. Hero
+   -------------------------------------------------------------------------- */
+.hero { padding-block: clamp(3.5rem, 10vw, 7.5rem) clamp(3rem, 7vw, 5rem); }
+
+.hero-id {
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+}
+.hero-id strong {
+    color: var(--ink);
+    font-weight: 600;
+}
+.hero-rule {
+    height: 1px;
+    background-color: var(--ink);
+    margin-block: 1.5rem 2rem;
+    transform-origin: left center;
+}
+
+.hero h1 {
+    font-size: var(--fs-display);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    margin-bottom: 0.75rem;
+}
+
+.hero-statement {
+    font-size: clamp(1.75rem, 4.2vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--ink-2);
+    margin-bottom: 1.75rem;
+}
+.wide-only { display: none; }
+@media (min-width: 640px) {
+    .wide-only { display: inline; }
+}
+
+.hero-chips { margin-top: 2rem; }
+.resume-actions { margin-top: 2.5rem; }
+
+.hero-lede {
+    max-width: var(--measure);
+    font-size: 1.125rem;
+    margin-bottom: 2.5rem;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--ink);
+    flex: none;
+    animation: breathe 2.4s ease-in-out infinite;
+}
+@keyframes breathe {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.25; }
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.15rem;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    color: var(--ink);
+    background-color: transparent;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.btn:hover {
+    background-color: var(--ink);
+    color: var(--paper);
+}
+.btn--solid {
+    background-color: var(--ink);
+    color: var(--paper);
+}
+.btn--solid:hover {
+    background-color: transparent;
+    color: var(--ink);
+}
+.btn svg { width: 15px; height: 15px; flex: none; }
+
+/* Section numbers and eyebrows, set in mono so they read as labels. */
+.band-num {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 0.8em;
+    color: var(--ink-3);
+    margin-right: 0.4rem;
+}
+.eyebrow {
+    display: block;
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    margin-bottom: 0.75rem;
+}
+
+/* Outlined tag, used for the hero topics and the skill lists. */
+.chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    line-height: 1.4;
+    color: var(--ink-2);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 0.35rem 0.7rem;
+    cursor: default;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+.chip:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+}
+.chip-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+.chip--lg {
+    font-size: var(--fs-sm);
+    padding: 0.6rem 1rem;
+}
+
+.entry-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+}
+
+/* Heading above a nested group, e.g. "Selected initiatives". */
+.group-label {
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+    font-weight: 500;
+    margin-top: 1.75rem;
+}
+.group-label + .initiatives { margin-top: 0.85rem; }
+
+/* A dated role nested inside a broader entry. */
+.subentry { margin-top: 1.5rem; }
+.subentry h4 { font-size: var(--fs-sm); }
+.subentry .meta-line { margin-bottom: 0.6rem; }
+
+/* Status pill on the current role. */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 99px;
+    padding: 0.2rem 0.65rem;
+    white-space: nowrap;
+}
+
+/* The "Now ·" marker under the hero. */
+.now-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 1rem 0.4rem 0.4rem;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    text-decoration: none;
+    color: var(--ink-2);
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+.now-strip:hover { border-color: var(--ink); color: var(--ink); }
+.now-strip .now { color: var(--ink); }
+.now-strip .mark { width: 32px; height: 32px; padding: 4px; }
+
+/* The ▹ marker that prefixes group headings. */
+.marker {
+    color: var(--ink-3);
+    margin-right: 0.45rem;
+    font-size: 0.85em;
+}
+
+/* Meta line inside an entry card. */
+.meta-line {
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    margin-top: 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. About
+   -------------------------------------------------------------------------- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+@media (min-width: 760px) {
+    .about-grid { grid-template-columns: 1fr 220px; gap: 3.5rem; }
+}
+.about-copy > p + p { margin-top: 1.1rem; }
+.about-copy { max-width: var(--measure); }
+
+/* An outlined frame sits offset behind the photo and closes the gap on
+   hover, which also lifts the portrait out of grayscale. */
+.portrait-frame {
+    position: relative;
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 4 / 5;
+}
+.portrait-frame::after {
     content: '';
     position: absolute;
-    left: 31px;
-    top: 12px;
-    bottom: 12px;
-    width: 1px;
-    background: linear-gradient(180deg, rgba(100, 255, 218, 0.45), #233554 45%, rgba(35, 53, 84, 0));
+    inset: 0;
+    z-index: 0;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius);
+    transform: translate(11px, 11px);
+    transition: transform 0.3s ease;
+    pointer-events: none;
 }
-@media (max-width: 767px) {
-    .timeline::before {
-        display: none;
-    }
+.portrait-frame:hover::after {
+    transform: translate(4px, 4px);
 }
 
-.exp-item {
+.portrait {
     position: relative;
-    padding-left: 0;
-}
-@media (min-width: 768px) {
-    .exp-item {
-        padding-left: 96px;
-    }
-}
-
-/* White tile that hosts a company / school logo, LinkedIn style */
-.logo-tile {
-    background-color: #ffffff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 9px;
-    box-shadow: 0 6px 20px -8px rgba(2, 12, 27, 0.9);
-    flex-shrink: 0;
-    overflow: hidden;
-}
-.logo-tile img {
+    z-index: 1;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: var(--radius);
+    filter: grayscale(1);
+    transition: filter 0.3s ease;
+}
+.portrait-frame:hover .portrait {
+    filter: grayscale(0);
 }
 
-/* Timeline-anchored variant: floats over the rail on desktop */
-.exp-item > .logo-tile,
-.exp-item > .logo-mono {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 1rem;
+/* Facts: plain rows on hairlines rather than a row of identical cards. */
+.facts {
+    margin-top: 3rem;
+    border-top: 1px solid var(--line);
 }
-@media (min-width: 768px) {
-    .exp-item > .logo-tile,
-    .exp-item > .logo-mono {
-        position: absolute;
-        left: 0;
-        top: 4px;
-        width: 64px;
-        height: 64px;
-        margin-bottom: 0;
-        outline: 6px solid #0a192f; /* masks the rail behind the tile */
-    }
+.fact {
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    gap: 0 var(--gutter);
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
 }
-
-/* Monogram fallback for organisations without a usable logo file */
-.logo-mono {
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Fira Code', monospace;
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: #0a192f;
-    background: linear-gradient(135deg, #64ffda, #38bdf8);
-    flex-shrink: 0;
-    box-shadow: 0 6px 20px -8px rgba(2, 12, 27, 0.9);
+.fact-value {
+    font-family: var(--mono);
+    font-size: 1.125rem;
+    font-weight: 500;
+    font-feature-settings: 'tnum' 1;
+    color: var(--ink);
+    white-space: nowrap;
+}
+.fact-label { font-size: var(--fs-sm); }
+@media (max-width: 860px) {
+    .fact { grid-template-columns: 1fr; gap: 0.15rem; }
 }
 
-/* The card itself */
-.exp-card {
-    min-width: 0;
-    overflow-wrap: break-word;
-    background-color: rgba(17, 34, 64, 0.6);
-    border: 1px solid #233554;
-    border-radius: 10px;
-    padding: 1.5rem;
-    transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+/* --------------------------------------------------------------------------
+   7. Entries (experience, education)
+   -------------------------------------------------------------------------- */
+.entry-head {
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    align-items: start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
 }
-@media (min-width: 768px) {
-    .exp-card {
-        padding: 1.75rem 2rem;
-    }
+@media (max-width: 480px) {
+    .entry-head { grid-template-columns: 1fr; gap: 0.85rem; }
 }
-.exp-card:hover {
-    border-color: rgba(100, 255, 218, 0.35);
-    background-color: rgba(17, 34, 64, 0.85);
-    transform: translateY(-3px);
-}
-
-/* Current role gets a warmer, accented treatment */
-.exp-card--featured {
-    border-color: rgba(100, 255, 218, 0.3);
-    background: linear-gradient(180deg, rgba(100, 255, 218, 0.05), rgba(17, 34, 64, 0.7) 40%);
-    box-shadow: 0 20px 50px -30px rgba(100, 255, 218, 0.5);
+.entry-head h3 { font-size: var(--fs-h3); }
+.entry-org {
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+    margin-top: 0.15rem;
 }
 
-/* Bullet list inside a card */
-.exp-bullets {
+/* Company logos keep their brand colour — the only colour on the page. */
+.mark {
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background-color: var(--mark-backing);
+}
+.mark img { width: 100%; height: 100%; object-fit: cover; }
+/* Keeps the title column aligned for entries that have no logo. */
+.mark--none {
+    border-color: transparent;
+    background-color: transparent;
+}
+@media (max-width: 480px) {
+    .mark--none { display: none; }
+}
+
+/* Logos that are artwork on transparency need room and a light backing. */
+.mark--pad {
+    padding: 5px;
+    background-color: var(--mark-backing);
+}
+.mark--pad img { object-fit: contain; }
+
+.entry-body { max-width: var(--measure); }
+.entry-body > p + p { margin-top: 1rem; }
+
+.bullets {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-width: var(--measure);
 }
-.exp-bullets li {
+.bullets li {
     position: relative;
-    padding-left: 1.4rem;
-    margin-bottom: 0.65rem;
-    line-height: 1.65;
+    padding-left: 1.15rem;
+    margin-bottom: 0.6rem;
 }
-.exp-bullets li:last-child {
-    margin-bottom: 0;
-}
-.exp-bullets li::before {
-    content: '▹';
+.bullets li:last-child { margin-bottom: 0; }
+.bullets li::before {
+    content: '';
     position: absolute;
     left: 0;
-    color: #64ffda;
+    top: 0.72em;
+    width: 5px;
+    height: 1px;
+    background-color: var(--ink-3);
 }
 
-/* "Now" pill with a soft pulse */
-.pill-live {
+.entry-body strong,
+.bullets strong {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+/* The current role is the only entry with a filled panel and a live dot. */
+.initiatives {
+    display: grid;
+    gap: 1px;
+    margin-top: 1.75rem;
+    background-color: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+@media (min-width: 760px) {
+    .initiatives { grid-template-columns: repeat(3, 1fr); }
+}
+.initiative {
+    background-color: var(--wash);
+    padding: 1.1rem 1.2rem;
+}
+.initiative h4 {
+    font-size: var(--fs-sm);
+    margin-bottom: 0.5rem;
+}
+.initiative p {
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+}
+.initiative .state {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-family: 'Fira Code', monospace;
+    font-family: var(--mono);
     font-size: 0.6875rem;
-    color: #64ffda;
-    border: 1px solid rgba(100, 255, 218, 0.4);
-    border-radius: 999px;
-    padding: 0.2rem 0.6rem;
-    white-space: nowrap;
-}
-.pill-live .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #64ffda;
-    animation: pulse-dot 2s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.35; transform: scale(0.8); }
+    color: var(--ink-2);
+    margin-bottom: 0.6rem;
 }
 
-/* Nested initiative cards (the Indosat deep-dive) */
-.initiative {
-    background-color: rgba(10, 25, 47, 0.65);
-    border: 1px solid #233554;
-    border-left: 2px solid rgba(100, 255, 218, 0.55);
-    border-radius: 8px;
-    padding: 1rem 1.1rem;
-    transition: border-color 0.25s ease, background-color 0.25s ease;
-    height: 100%;
-}
-.initiative:hover {
-    border-color: rgba(100, 255, 218, 0.35);
-    border-left-color: #64ffda;
-    background-color: rgba(10, 25, 47, 0.95);
-}
-
-/* ------------------------------------------------------------
-   Stats strip
-   ------------------------------------------------------------ */
-.stat-card {
-    min-width: 0;
-    overflow-wrap: anywhere;
-    background-color: rgba(17, 34, 64, 0.55);
-    border: 1px solid #233554;
-    border-radius: 10px;
-    padding: 1.1rem 1.25rem;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-}
-.stat-card:hover {
-    border-color: rgba(100, 255, 218, 0.35);
-    transform: translateY(-3px);
-}
-.stat-value {
-    font-family: 'Fira Code', monospace;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #64ffda;
-    line-height: 1.1;
-}
-.stat-label {
-    font-size: 0.8125rem;
-    color: #8892b0;
-    margin-top: 0.35rem;
-    line-height: 1.4;
-}
-
-/* ------------------------------------------------------------
-   Animation classes controlled by JS
-   ------------------------------------------------------------ */
-.fade-in-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    will-change: opacity, transform;
-}
-.fade-in-section.is-visible {
-    opacity: 1;
-    transform: none;
-}
-
-/* ------------------------------------------------------------
-   Projects
-   ------------------------------------------------------------ */
-.project-card {
-    border: 1px solid transparent;
-}
-.project-card:hover {
-    border-color: rgba(100, 255, 218, 0.3);
-}
-
-#projectsCarousel {
-    max-width: 100%;
-}
-#projectsCarousel > div {
+/* Tools used: a plain comma-free list on a hairline, not pill soup. */
+.tools {
     display: flex;
-}
-
-/* Space for the carousel arrows */
-.carousel-shell {
-    padding-left: 40px;
-    padding-right: 40px;
-}
-@media (min-width: 1024px) {
-    .carousel-shell {
-        padding-left: 80px;
-        padding-right: 80px;
-    }
-}
-
-/* ------------------------------------------------------------
-   Particles canvas / stacking
-   ------------------------------------------------------------ */
-#particlesCanvas {
-    z-index: 0;
-}
-main, header, footer {
-    position: relative;
-    z-index: 1;
-}
-
-.navbar-scrolled {
-    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-top: 1.5rem;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
 }
+
+/* --------------------------------------------------------------------------
+   8. Projects
+   -------------------------------------------------------------------------- */
+.projects {
+    display: grid;
+    gap: 2.5rem;
+}
+@media (min-width: 760px) {
+    .projects { grid-template-columns: 1fr 1fr; gap: 3rem 2.5rem; }
+}
+.project {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+.project-shot {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    filter: grayscale(1);
+    transition: filter 0.3s ease;
+}
+.project:hover .project-shot,
+.project:focus-visible .project-shot { filter: grayscale(0); }
+
+.project h3 {
+    font-size: var(--fs-h3);
+    margin-top: 1.1rem;
+    display: inline-block;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+}
+.project:hover h3 { border-bottom-color: var(--ink); }
+.project p {
+    font-size: var(--fs-sm);
+    margin-top: 0.5rem;
+}
+.project .tools { margin-top: 1rem; padding-top: 0.85rem; }
+
+/* --------------------------------------------------------------------------
+   9. Skills
+   -------------------------------------------------------------------------- */
+.skill-grid {
+    display: grid;
+    gap: 2rem 3rem;
+}
+@media (min-width: 760px) {
+    .skill-grid { grid-template-columns: 1fr 1fr; }
+}
+.skill-group h3 {
+    font-size: var(--fs-h3);
+    margin-bottom: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. Contact & footer
+   -------------------------------------------------------------------------- */
+.contact-heading {
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+}
+.contact-place { margin-top: 1.25rem; }
+
+.contact-copy {
+    max-width: var(--measure);
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+}
+.elsewhere {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    font-size: var(--fs-sm);
+}
+.elsewhere a {
+    color: var(--ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+.elsewhere a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+}
+
+.site-foot {
+    border-top: 1px solid var(--line);
+    padding-block: 2rem;
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+}
+
+/* --------------------------------------------------------------------------
+   11. The one orchestrated moment: the hero arrives on load.
+   Nothing animates on scroll.
+   -------------------------------------------------------------------------- */
+.rise {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+.rise:nth-child(1) { animation-delay: 0.02s; }
+.rise:nth-child(2) { animation-delay: 0.08s; }
+.rise:nth-child(3) { animation-delay: 0.16s; }
+.rise:nth-child(4) { animation-delay: 0.24s; }
+.rise:nth-child(5) { animation-delay: 0.32s; }
+.rise:nth-child(6) { animation-delay: 0.40s; }
+
+@keyframes rise {
+    to { opacity: 1; transform: none; }
+}
+
+.hero-rule.rise {
+    transform: scaleX(0);
+    animation-name: draw;
+}
+@keyframes draw {
+    to { opacity: 1; transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+    .rise { opacity: 1; transform: none; }
+    .hero-rule.rise { transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   12. Article pages (project case studies)
+   -------------------------------------------------------------------------- */
+.article { padding-block: 3.5rem 5rem; }
+.article-head { margin-bottom: 2.5rem; }
+.article-head h1 {
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    letter-spacing: -0.03em;
+    max-width: 20ch;
+}
+.article-head .standfirst {
+    font-size: 1.125rem;
+    max-width: var(--measure);
+    margin-top: 1rem;
+}
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+}
+
+.prose { max-width: var(--measure); }
+.prose h2 {
+    font-size: var(--fs-h2);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+.prose h3 {
+    font-size: var(--fs-h3);
+    margin-top: 2rem;
+    margin-bottom: 0.65rem;
+}
+.prose p + p { margin-top: 1.1rem; }
+.prose ul { padding-left: 0; list-style: none; margin: 1rem 0; }
+.prose ul li {
+    position: relative;
+    padding-left: 1.15rem;
+    margin-bottom: 0.6rem;
+}
+.prose ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 5px;
+    height: 1px;
+    background-color: var(--ink-3);
+}
+.prose strong,
+.prose b { color: var(--ink); font-weight: 500; }
+.prose a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* Numbered lists are for genuine sequences — a lifecycle, a set of steps. */
+.prose ol {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+}
+.prose ol li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 2.25rem;
+    margin-bottom: 0.6rem;
+}
+.prose ol li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    font-family: var(--mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+}
+
+/* Side-by-side tech breakdown inside an article. */
+.spec-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin: 1.25rem 0;
+}
+@media (min-width: 640px) {
+    .spec-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+}
+.spec-grid ul { margin-top: 0.5rem; }
+.spec-grid li { font-size: var(--fs-sm); margin-bottom: 0.35rem; }
+
+.figure { margin: 2rem 0; max-width: 100%; }
+.figure img {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-color: var(--mark-backing);
+}
+.figure--lead img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.figure figcaption {
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    margin-top: 0.6rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+    transition: border-color 0.15s ease;
+}
+.back-link:hover { border-bottom-color: var(--ink); }
+.back-link svg { width: 14px; height: 14px; }

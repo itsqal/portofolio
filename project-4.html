@@ -1,162 +1,149 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Project — Tracktion Fleet Management System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracktion — Fleet Management System — Anaking Faiqal Lufi</title>
+    <meta name="description" content="Backend system for tracking logistics fleet assets">
+    <meta name="author" content="Anaking Faiqal Lufi">
+    <meta name="theme-color" content="#ffffff">
 
-	<script src="https://cdn.tailwindcss.com"></script>
-	<script>
-		tailwind.config = {
-			theme: {
-				extend: {
-					colors: {
-						navy: {
-							900: '#0a192f',
-							800: '#112240',
-							700: '#233554',
-						},
-						accent: { DEFAULT: '#64ffda' },
-						slate: { light: '#8892b0', lighter: '#ccd6f6' }
-					},
-					fontFamily: {
-						sans: ['Inter', 'system-ui', 'sans-serif'],
-						mono: ['Fira Code', 'monospace'],
-					}
-				}
-			}
-		}
-	</script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-	<link rel="stylesheet" href="style.css">
-	<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Set the theme before first paint so the page never flashes. -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'dark' || saved === 'light') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                }
+            } catch (e) { /* private mode: fall through to the light default */ }
+        })();
+    </script>
 </head>
+<body>
 
-<body class="bg-navy-900 text-slate-light font-sans antialiased">
+    <header class="masthead">
+        <div class="wrap masthead-inner">
+            <a class="wordmark" href="index.html">Anaking Faiqal</a>
 
-	<nav class="fixed w-full top-0 z-50 px-6 md:px-12 lg:px-24 py-4 flex justify-between items-center backdrop-blur-sm bg-navy-900/80">
-		<a href="index.html" class="text-accent font-mono text-xl font-bold hover:text-slate-lighter transition-colors">&lt;Qal /&gt;</a>
-		<ul class="hidden md:flex md:space-x-5 lg:space-x-8 font-mono text-xs lg:text-sm">
-			<li><a href="index.html#about" class="hover:text-accent transition-colors"><span class="text-accent">01.</span> About</a></li>
-			<li><a href="index.html#experience" class="hover:text-accent transition-colors"><span class="text-accent">02.</span> Experience</a></li>
-			<li><a href="index.html#education" class="hover:text-accent transition-colors"><span class="text-accent">03.</span> Education</a></li>
-			<li><a href="index.html#projects" class="hover:text-accent transition-colors"><span class="text-accent">04.</span> Projects</a></li>
-			<li><a href="index.html#skills" class="hover:text-accent transition-colors"><span class="text-accent">05.</span> Skills</a></li>
-			<li><a href="index.html#contact" class="hover:text-accent transition-colors"><span class="text-accent">06.</span> Contact</a></li>
-		</ul>
-		<div class="md:hidden">
-			<a href="index.html#contact" class="px-4 py-2 border border-accent text-accent text-xs rounded hover:bg-accent/10 transition-colors">Contact</a>
-		</div>
-	</nav>
+            <nav aria-label="Sections">
+                <a href="index.html#about">About</a>
+                <a href="index.html#experience">Experience</a>
+                <a href="index.html#education">Education</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#skills">Skills</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
 
-	<header class="pt-24"></header>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+                <span class="visually-hidden">Switch to dark mode</span>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2"></circle>
+                    <path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
 
-	<main class="max-w-5xl mx-auto px-6 md:px-12 lg:px-24 py-12">
-		<article class="bg-navy-800 rounded-lg p-6 lg:p-10 shadow-lg">
+    <main class="wrap article">
+        <article>
+            <div class="article-head">
+                <h1>Tracktion — Fleet Management System</h1>
+                <p class="standfirst">Backend system for tracking logistics fleet assets</p>
+                <div class="article-meta">
+                    <span>Node.js</span>
+                    <span>PostgreSQL</span>
+                    <span>Google Maps API</span>
+                    <span>RESTful API</span>
+                    <span>GCP App Engine</span>
+                </div>
+            </div>
 
-			<!-- Title -->
-			<div class="mb-6">
-				<h1 class="text-3xl md:text-4xl font-bold text-slate-lighter">
-					Tracktion — Fleet Management System
-				</h1>
-				<h2 class="text-lg md:text-xl text-slate-light mt-2">
-					Backend system for tracking logistics fleet assets
-				</h2>
-			</div>
+            <figure class="figure figure--lead">
+                <img src="assets/Tracktion-thumbnail.png" alt="" width="1600" height="1000">
+            </figure>
 
-			<!-- Thumbnail -->
-			<div class="w-full rounded overflow-hidden mb-8 border border-navy-700">
-				<img src="assets/Tracktion-thumbnail.png" alt="Tracktion Project Thumbnail"
-				     class="w-full h-64 md:h-96 object-cover">
-			</div>
+            <section class="prose">
+                <h2>Project Overview</h2>
+                <p>
+                Tracktion is a fleet management system developed for a logistics company that required a
+                digital solution to monitor and manage their truck assets. The main objective of this
+                project was to provide real-time visibility into fleet locations and operational movement
+                through a centralized system.
+                </p>
 
-			<!-- Article Content -->
-			<section class="prose prose-invert max-w-none text-base leading-relaxed space-y-5">
+                <h2>Business Problem</h2>
+                <p>
+                The client previously relied on manual tracking and fragmented tools to monitor fleet
+                operations, making it difficult to understand asset utilization, delivery routes, and
+                operational efficiency. They needed a backend system capable of processing location data,
+                transforming it into meaningful geographic insights, and serving this information reliably
+                to a frontend dashboard.
+                </p>
 
-				<h3 class="text-xl font-semibold">Project Overview</h3>
-				<p>
-					Tracktion is a fleet management system developed for a logistics company that required a
-					digital solution to monitor and manage their truck assets. The main objective of this
-					project was to provide real-time visibility into fleet locations and operational movement
-					through a centralized system.
-				</p>
+                <h2>Technical Challenges</h2>
+                <ul>
+                <li>Processing and managing continuous geolocation data from fleet tracking devices</li>
+                <li>Translating raw latitude and longitude into readable location information</li>
+                <li>Calculating travel distances accurately for operational insights</li>
+                <li>Designing a backend API that could scale and remain reliable</li>
+                </ul>
 
-				<h3 class="text-xl font-semibold">Business Problem</h3>
-				<p>
-					The client previously relied on manual tracking and fragmented tools to monitor fleet
-					operations, making it difficult to understand asset utilization, delivery routes, and
-					operational efficiency. They needed a backend system capable of processing location data,
-					transforming it into meaningful geographic insights, and serving this information reliably
-					to a frontend dashboard.
-				</p>
+                <h2>Technical Approach</h2>
+                <figure class="figure"><img src="assets/project4/tracktion_system_architecture.png" alt="System Architecture Diagram"></figure>
+                <p>
+                I worked as a backend developer and designed the system using a Node.js-based API architecture.
+                The backend receives GPS coordinates from tracking devices, processes the data, and integrates
+                with Google Maps API to perform reverse geocoding and distance calculations.
+                </p>
 
-				<h3 class="text-xl font-semibold">Technical Challenges</h3>
-				<ul class="list-disc pl-6">
-					<li>Processing and managing continuous geolocation data from fleet tracking devices</li>
-					<li>Translating raw latitude and longitude into readable location information</li>
-					<li>Calculating travel distances accurately for operational insights</li>
-					<li>Designing a backend API that could scale and remain reliable</li>
-				</ul>
+                <p>
+                Processed data is stored in PostgreSQL, allowing structured querying of fleet history,
+                locations, and movement patterns. The backend exposes RESTful APIs that are consumed by
+                a frontend dashboard for real-time visualization and monitoring.
+                </p>
 
-				<h3 class="text-xl font-semibold">Technical Approach</h3>
-				<figure class="my-6 flex justify-center bg-white p-4">
-					<img src="assets/project4/tracktion_system_architecture.png" alt="System Architecture Diagram">
-				</figure>
-				<p>
-					I worked as a backend developer and designed the system using a Node.js-based API architecture.
-					The backend receives GPS coordinates from tracking devices, processes the data, and integrates
-					with Google Maps API to perform reverse geocoding and distance calculations.
-				</p>
+                <h2>Deployment</h2>
+                <p>
+                The backend service was deployed on Google Cloud Platform using App Engine, enabling
+                easy scalability and managed infrastructure. This setup allowed the frontend application
+                to consume APIs reliably while keeping operational overhead minimal.
+                </p>
 
-				<p>
-					Processed data is stored in PostgreSQL, allowing structured querying of fleet history,
-					locations, and movement patterns. The backend exposes RESTful APIs that are consumed by
-					a frontend dashboard for real-time visualization and monitoring.
-				</p>
+                <h2>Lessons Learned</h2>
+                <p>
+                This project strengthened my understanding of geospatial data processing, API design,
+                and cloud-based deployment. I also learned how to translate logistics business needs into
+                clear technical requirements and build a backend system that directly supports operational
+                decision-making.
+                </p>
+            </section>
 
-				<h3 class="text-xl font-semibold">Deployment</h3>
-				<p>
-					The backend service was deployed on Google Cloud Platform using App Engine, enabling
-					easy scalability and managed infrastructure. This setup allowed the frontend application
-					to consume APIs reliably while keeping operational overhead minimal.
-				</p>
+            <a class="back-link" href="index.html#projects">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5M11 18l-6-6 6-6"></path>
+                </svg>
+                All projects
+            </a>
+        </article>
+    </main>
 
-				<h3 class="text-xl font-semibold">Lessons Learned</h3>
-				<p>
-					This project strengthened my understanding of geospatial data processing, API design,
-					and cloud-based deployment. I also learned how to translate logistics business needs into
-					clear technical requirements and build a backend system that directly supports operational
-					decision-making.
-				</p>
+    <footer>
+        <div class="wrap site-foot">
+            <span>Designed and built by Faiqal</span>
+            <span>Last updated Feb 2026</span>
+        </div>
+    </footer>
 
-			</section>
-
-			<!-- Tech Stack -->
-			<footer class="pt-6 border-t border-navy-700 mt-8">
-				<h4 class="font-mono text-accent text-sm mb-3">Tech Stack</h4>
-				<div class="flex flex-wrap gap-3">
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">Node.js</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">PostgreSQL</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">Google Maps API</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">RESTful API</span>
-					<span class="px-3 py-1 text-xs rounded bg-navy-700 text-slate-light">GCP App Engine</span>
-				</div>
-
-				<div class="mt-6 flex justify-between items-center">
-					<a href="index.html#projects" class="font-mono text-sm text-accent hover:underline">
-						← Back to projects
-					</a>
-					<div class="text-sm text-slate-light">Documentation last updated on: Feb 2026</div>
-				</div>
-			</footer>
-
-		</article>
-	</main>
-
-	<footer class="py-6 text-center text-xs font-mono text-slate-light opacity-70">
-		<p>Designed & Built by Faiqal</p>
-	</footer>
-
+    <script src="script.js"></script>
 </body>
 </html>
