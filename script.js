@@ -27,7 +27,7 @@
         }
 
         var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', isDark ? '#000000' : '#ffffff');
+        if (meta) meta.setAttribute('content', isDark ? '#0d1729' : '#f5f7fa');
     }
 
     // Sync the button to whatever the head script decided.
